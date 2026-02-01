@@ -5,11 +5,16 @@
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
+    "packages": [
+        "filament/filament",
+        "laravel/fortify"
+    ],
     "sail": false,
     "skills": [
         "fluxui-development",
         "livewire-development",
         "pest-testing",
-        "tailwindcss-development"
+        "tailwindcss-development",
+        "developing-with-fortify"
     ]
 }

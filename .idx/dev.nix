@@ -13,12 +13,20 @@
     # pkgs.nodejs_20
     # pkgs.nodePackages.nodemon
   ];
+
+  services = {
+    mysql = {
+      enable = true;
+      package = pkgs.mysql80;
+    };
+  };
   # Sets environment variables in the workspace
   env = {};
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
+      "cweijan.vscode-database-client2"
       "google.gemini-cli-vscode-ide-companion"
     ];
     # Enable previews
