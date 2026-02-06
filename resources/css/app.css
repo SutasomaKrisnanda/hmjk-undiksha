@@ -17,7 +17,7 @@
     --font-display: "Playfair Display", serif;
     --font-script: "Dancing Script", cursive;
 
-    /* Warna Palette BEM (Light Mode) */
+    /* Warna Palette HMJ (Light Mode) */
     --color-hmj-purple: #6D28D9;
     --color-hmj-blue: #1E3A8A;
     --color-hmj-gold: #D97706;
@@ -30,9 +30,18 @@
     --color-gsm-accent: #8A2BE2;
     --color-gsm-surface: #1E1E1E;
 
+    /* Warna Palette masing-masing bidang */
+    --color-bidang-1: #6D28D9;
+    --color-bidang-2: #1E3A8A;
+    --color-bidang-3: #D97706;
+    --color-bidang-4: #FFD700;
+    --color-bidang-5: #8A2BE2;
+    --color-bidang-6: #4B0082;
+    --color-bidang-7: #1E1E1E;
+
     /* Custom Background */
     --background-image-grain: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-    
+
     /* Animation */
     --animate-bounce-slow: bounce 3s infinite;
 

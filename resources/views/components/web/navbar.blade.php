@@ -66,11 +66,11 @@
             </div>
 
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#"
+                <a href="/"
                     class="font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400">BERANDA</a>
                 <a href="#profil" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">PROFIL</a>
-                <a href="#infosphere" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">INFOSPHERE</a>
-                <a href="#berita" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">BERITA</a>
+                <a href="/infosphere" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">INFOSPHERE</a>
+                {{-- <a href="#berita" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">BERITA</a> --}}
                 {{-- <a href="#advo" class="px-4 py-2 rounded font-bold transition bg-hmj-gold text-white hover:bg-yellow-600 dark:bg-hmj-purple dark:text-white dark:hover:bg-purple-500">ADVO CENTER</a> --}}
             </div>
 
@@ -83,9 +83,9 @@
 
     <div x-show="mobileOpen" x-transition
         class="md:hidden bg-white dark:bg-[#1a1a1a] border-t dark:border-white/10 px-4 py-4 space-y-3">
-        <a href="#" class="block font-bold text-hmj-purple dark:text-yellow-400">BERANDA</a>
+        <a href="/" class="block font-bold text-hmj-purple dark:text-yellow-400">BERANDA</a>
         <a href="#profil" class="block text-gray-700 dark:text-gray-300">PROFIL</a>
-        <a href="#infosphere" class="block text-gray-700 dark:text-gray-300">INFOSPHERE</a>
+        <a href="/infosphere" class="block text-gray-700 dark:text-gray-300">INFOSPHERE</a>
         {{-- <a href="#advo" class="block font-bold text-hmj-gold dark:text-purple-400">ADVO CENTER</a> --}}
     </div>
 </nav>
