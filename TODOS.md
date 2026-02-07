@@ -49,7 +49,7 @@ Sebelum mengerjakan Frontend dinamis, kita perlu menyiapkan "wadah" datanya terl
 Fokus: *First Impression* pengunjung.
 *File: `resources/views/welcome.blade.php`*
 
-- [ ] ** **Hero Section Beranimasi**
+- [1/2] ** **Hero Section Beranimasi**
     - *Task:* Implementasi animasi halus (fade-in/slide) pada teks sambutan dan gambar latar. Pastikan *mobile-friendly*.
 - [ ] ** **Upcoming Event Widget**
     - *Task:* Component Livewire untuk menampilkan 3 agenda terdekat dari database `events`.

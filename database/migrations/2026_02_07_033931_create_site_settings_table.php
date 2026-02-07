@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('hero_background')->nullable(); // Kolom untuk gambar
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 <div
-    class="py-2 text-xs text-white transition-colors duration-300
+    class="hidden md:block py-2 text-xs text-white transition-colors duration-300
     bg-linear-to-r from-blue-900 to-purple-800
     dark:from-[#2a0a4d] dark:to-black border-b dark:border-white/10 relative z-50">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -36,8 +36,9 @@
                 </div>
             </div>
             <span class="border-l border-white/30 h-3 mx-2"></span>
+
             @auth
-                <a href="{{ route('dashboard') }}"
+                <a href="/admin"
                     class="hover:text-green-400 transition font-bold flex items-center gap-1"><i
                         class="fas fa-user-circle"></i> Dashboard</a>
             @else
@@ -53,7 +54,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between h-20">
             <div class="flex items-center gap-3">
-                <a href="/" class="block">
+                <a href="{{ route('home') }}" class="block">
                     <img src="{{ asset('images/logo.png') }}"
                          alt="Logo HMJ"
                          class="h-10 w-auto object-contain">
@@ -66,12 +67,24 @@
             </div>
 
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="/"
-                    class="font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400">BERANDA</a>
-                <a href="#profil" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">PROFIL</a>
-                <a href="/infosphere" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">INFOSPHERE</a>
-                {{-- <a href="#berita" class="hover:text-hmj-purple dark:hover:text-purple-300 transition">BERITA</a> --}}
-                {{-- <a href="#advo" class="px-4 py-2 rounded font-bold transition bg-hmj-gold text-white hover:bg-yellow-600 dark:bg-hmj-purple dark:text-white dark:hover:bg-purple-500">ADVO CENTER</a> --}}
+                <a href="{{ route('home') }}"
+                    class="{{ request()->routeIs('home')
+                        ? 'font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400'
+                        : 'hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300' }}">
+                    BERANDA
+                </a>
+
+                <a href="{{ route('home') }}#profil"
+                   class="hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300">
+                   PROFIL
+                </a>
+
+                <a href="{{ route('infosphere') }}"
+                   class="{{ request()->routeIs('infosphere')
+                        ? 'font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400'
+                        : 'hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300' }}">
+                   INFOSPHERE
+                </a>
             </div>
 
             <div class="md:hidden flex items-center">
@@ -82,10 +95,33 @@
     </div>
 
     <div x-show="mobileOpen" x-transition
-        class="md:hidden bg-white dark:bg-[#1a1a1a] border-t dark:border-white/10 px-4 py-4 space-y-3">
-        <a href="/" class="block font-bold text-hmj-purple dark:text-yellow-400">BERANDA</a>
-        <a href="#profil" class="block text-gray-700 dark:text-gray-300">PROFIL</a>
-        <a href="/infosphere" class="block text-gray-700 dark:text-gray-300">INFOSPHERE</a>
-        {{-- <a href="#advo" class="block font-bold text-hmj-gold dark:text-purple-400">ADVO CENTER</a> --}}
-    </div>
+        class="md:hidden bg-white dark:bg-[#1a1a1a] border-t dark:border-white/10 px-4 py-4 space-y-3 shadow-lg rounded-b-2xl">
+
+        <a href="{{ route('home') }}"
+           class="block {{ request()->routeIs('home') ? 'font-bold text-hmj-purple dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300' }}">
+           BERANDA
+        </a>
+
+        <a href="{{ route('home') }}#profil"
+           class="block text-gray-700 dark:text-gray-300">
+           PROFIL
+        </a>
+
+        <a href="{{ route('infosphere') }}"
+           class="block {{ request()->routeIs('infosphere') ? 'font-bold text-hmj-purple dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300' }}">
+           INFOSPHERE
+        </a>
+
+        <div class="border-t border-gray-100 dark:border-white/10 pt-4 mt-2">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Tampilan</span>
+                <div class="flex items-center gap-2 bg-gray-100 dark:bg-white/5 p-1 rounded-full">
+                    <button @click="setMode('light')" :class="mode === 'light' ? 'bg-white shadow text-yellow-500' : 'text-gray-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition"><i class="fas fa-sun"></i></button>
+                    <button @click="setMode('dark')" :class="mode === 'dark' ? 'bg-gray-700 shadow text-purple-400' : 'text-gray-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition"><i class="fas fa-moon"></i></button>
+                    <button @click="setMode('system')" :class="mode === 'system' ? 'bg-gray-200 dark:bg-gray-600 shadow text-gray-700 dark:text-gray-200' : 'text-gray-400'" class="w-8 h-8 rounded-full flex items-center justify-center transition"><i class="fas fa-desktop"></i></button>
+                </div>
+            </div>
+        </div>
+
+        </div>
 </nav>
