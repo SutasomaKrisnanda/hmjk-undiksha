@@ -15,8 +15,8 @@ mount(function () {
 
 ?>
 
-<div class="relative w-full bg-gray-50 dark:bg-gray-900"
-     style="height: 100vh; max-height: 650px;" 
+<div class="relative w-full bg-white dark:bg-gsm-dark"
+     style="height: 100vh; max-height: 650px;"
      x-data="{ finished: false }">
 
     <style>
@@ -32,21 +32,21 @@ mount(function () {
 
     <header class="absolute inset-0 flex items-center justify-center font-sans z-10 animate-slam overflow-hidden"
             @animationend="finished = true">
-        
+
         <div class="w-full h-[120vh] z-0 transition-none"
              :class="finished ? 'fixed top-0 left-0' : 'absolute inset-0'">
-            
+
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
                  style="background-image: url('{{ $heroImage }}');">
             </div>
 
-            <div class="absolute inset-0 bg-gradient-to-r from-hmj-purple/90 to-hmj-blue/80 dark:from-gsm-primary/85 dark:to-gsm-dark/80">
+            <div class="absolute inset-0 bg-linear-to-r from-hmj-purple/90 to-hmj-blue/80 dark:from-gsm-primary/85 dark:to-gsm-dark/80">
             </div>
         </div>
 
         <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto mt-10">
-            
-            <span class="inline-block py-1 px-4 rounded-full text-xs font-bold tracking-widest mb-6 animate-[bounce_3s_infinite]
+
+            <span class="inline-block py-1 px-4 rounded-full text-xs font-bold tracking-widest mb-6 animate-bounce-slow
                          bg-white/20 border border-white/30 backdrop-blur-sm shadow-lg
                          dark:bg-gsm-accent/20 dark:border-gsm-accent/50 dark:text-gray-100">
                 OFFICIAL WEBSITE
@@ -70,7 +70,7 @@ mount(function () {
             <div class="flex flex-col md:flex-row justify-center gap-5">
                 <a href="#infosphere"
                    class="group relative px-8 py-3.5 rounded font-bold shadow-xl overflow-hidden
-                          bg-white text-hmj-purple 
+                          bg-white text-hmj-purple
                           dark:bg-gsm-secondary dark:text-gsm-dark">
                    <span class="absolute top-0 left-0 w-full h-full bg-gray-100 dark:bg-yellow-400 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0"></span>
                    <span class="relative z-10 transition-colors duration-300">
@@ -80,10 +80,10 @@ mount(function () {
             </div>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 z-20 transform scale-105 origin-bottom">
+        <div class="absolute -bottom-1 left-0 right-0 z-20 transform scale-105 origin-bottom">
             <svg viewBox="0 0 1440 100" fill="none" class="w-full h-auto block">
                 <path d="M0 100L1440 100L1440 0C1440 0 1082.5 80 720 80C357.5 80 0 0 0 0L0 100Z"
-                      class="fill-gray-50 dark:fill-gray-900 transition-colors duration-500" />
+                      class="fill-white dark:fill-gsm-dark transition-colors duration-500" />
             </svg>
         </div>
 
