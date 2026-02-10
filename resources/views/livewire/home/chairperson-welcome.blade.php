@@ -21,15 +21,15 @@ state(['image' => asset('images/sambutan-ketua.jpg')]);
 
                     <div class="absolute inset-0 w-full h-full overflow-hidden group">
                         <img src="{{ $image }}"
-                             class="w-full h-full object-cover grayscale dark:grayscale-0 transition-transform duration-[1500ms] group-hover:scale-110">
+                             class="w-full h-full object-cover grayscale dark:grayscale-0 transition-transform duration-1500 group-hover:scale-110">
                     </div>
 
-                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white bg-gradient-to-t from-black/90 to-transparent">
+                    <div class="absolute bottom-0 left-0 right-0 p-8 text-white bg-linear-to-t from-black/90 to-transparent">
                         <h3 class="text-3xl font-bold font-serif translate-y-4 opacity-0 transition-all duration-700 delay-500"
                             :class="visible ? '!translate-y-0 !opacity-100' : ''">
                             Masayu Adithi Shivadevi
                         </h3>
-                        <p class="text-sm opacity-90 text-hmj-gold dark:text-gsm-secondary font-bold tracking-widest uppercase translate-y-4 opacity-0 transition-all duration-700 delay-700"
+                        <p class="text-sm text-hmj-gold dark:text-gsm-secondary font-bold tracking-widest uppercase translate-y-4 opacity-0 transition-all duration-700 delay-700"
                            :class="visible ? '!translate-y-0 !opacity-100' : ''">
                             Ketua Himpunan 2026
                         </p>

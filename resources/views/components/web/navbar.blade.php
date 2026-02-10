@@ -54,7 +54,7 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between h-20">
             <div class="flex items-center gap-3">
-                <a href="{{ route('home') }}" class="block">
+                <a href="{{ route('home') }}" wire:navigate class="block">
                     <img src="{{ asset('images/logo.png') }}"
                          alt="Logo HMJ"
                          class="h-10 w-auto object-contain">
@@ -67,23 +67,24 @@
             </div>
 
             <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="{{ route('home') }}"
+
+                <a href="{{ route('home') }}" wire:navigate.hover
                     class="{{ request()->routeIs('home')
                         ? 'font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400'
                         : 'hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300' }}">
                     BERANDA
                 </a>
 
-                <a href="{{ route('home') }}#profil"
+                <a href="{{ route('home') }}#profil" wire:navigate
                    class="hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300">
                    PROFIL
                 </a>
 
-                <a href="{{ route('infosphere') }}"
-                   class="{{ request()->routeIs('infosphere')
+                <a href="{{ route('structure.index') }}" wire:navigate.hover
+                    class="{{ request()->routeIs('structure.index')
                         ? 'font-bold border-b-2 border-hmj-purple dark:border-yellow-400 text-hmj-purple dark:text-yellow-400'
                         : 'hover:text-hmj-purple dark:hover:text-purple-300 transition text-gray-700 dark:text-gray-300' }}">
-                   INFOSPHERE
+                   STRUKTUR
                 </a>
             </div>
 
@@ -97,19 +98,19 @@
     <div x-show="mobileOpen" x-transition
         class="md:hidden bg-white dark:bg-[#1a1a1a] border-t dark:border-white/10 px-4 py-4 space-y-3 shadow-lg rounded-b-2xl">
 
-        <a href="{{ route('home') }}"
+        <a href="{{ route('home') }}" wire:navigate
            class="block {{ request()->routeIs('home') ? 'font-bold text-hmj-purple dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300' }}">
            BERANDA
         </a>
 
-        <a href="{{ route('home') }}#profil"
+        <a href="{{ route('home') }}#profil" wire:navigate
            class="block text-gray-700 dark:text-gray-300">
            PROFIL
         </a>
 
-        <a href="{{ route('infosphere') }}"
-           class="block {{ request()->routeIs('infosphere') ? 'font-bold text-hmj-purple dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300' }}">
-           INFOSPHERE
+        <a href="{{ route('structure.index') }}" wire:navigate
+           class="block {{ request()->routeIs('structure.index') ? 'font-bold text-hmj-purple dark:text-yellow-400' : 'text-gray-700 dark:text-gray-300' }}">
+           STRUKTUR
         </a>
 
         <div class="border-t border-gray-100 dark:border-white/10 pt-4 mt-2">
@@ -123,5 +124,5 @@
             </div>
         </div>
 
-        </div>
+    </div>
 </nav>

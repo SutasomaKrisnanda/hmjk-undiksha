@@ -24,6 +24,7 @@ Bagian ini adalah kerangka dasar aplikasi.
 - [x] **Setup Filament Admin Panel**
 - [x] **Global Footer** (Responsif & Data Statis)
 - [x] **Global Navbar** (Sticky, Mobile Menu, Dark Mode, Logic Active State)
+- [ ] *Livewire smooth navigating system
 
 ---
 

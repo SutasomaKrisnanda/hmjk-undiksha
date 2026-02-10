@@ -22,7 +22,7 @@
                 <h4 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-gray-700 pb-2 inline-block text-purple-400">Tautan Cepat</h4>
                 <ul class="space-y-3 text-sm text-gray-400">
                     <li><a href="#" class="hover:text-white transition">Tentang Kami</a></li>
-                    <li><a href="{{ route('infosphere') }}" class="hover:text-white transition">InfoSphere (Struktur)</a></li>
+                    <li><a href="{{ route('structure.index') }}" class="hover:text-white transition">Struktur</a></li>
                     <li><a href="#" class="hover:text-white transition">Program Kerja</a></li>
                     <li><a href="/admin" class="hover:text-white transition text-hmj-gold">Login Admin</a></li>
                 </ul>
