@@ -1,12 +1,10 @@
 <x-filament-panels::page>
-    <form wire:submit="save">
 
-        {{ $this->form }}
+    {{ $this->form }}
 
-        <div class="flex justify-end gap-3 mt-4">
-            <x-filament::button type="submit">
-                Simpan Perubahan
-            </x-filament::button>
-        </div>
-    </form>
+    <div class="mt-6 flex justify-end gap-x-3">
+        <x-filament::button wire:click="save" class="w-full md:w-auto">
+            Simpan Perubahan
+        </x-filament::button>
+    </div>
 </x-filament-panels::page>

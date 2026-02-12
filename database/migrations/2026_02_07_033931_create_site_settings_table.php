@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('hero_background')->nullable(); // Kolom untuk gambar
             $table->timestamps();
+            $table->string('structure_banner_light')->nullable(); // Banner Mode Terang
+            $table->string('structure_banner_dark')->nullable();  // Banner Mode Gelap
         });
     }
 

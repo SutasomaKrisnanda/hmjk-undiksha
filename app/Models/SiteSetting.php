@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 class SiteSetting extends Model
 {
     protected $guarded = [];
+    protected $fillable = [
+        'hero_background',
+        'structure_banner_light',
+        'structure_banner_dark',
+    ];
 
     // Helper untuk mengambil setting (Singleton pattern sederhana)
     public static function getHeroImage()

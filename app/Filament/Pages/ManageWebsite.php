@@ -8,26 +8,20 @@ use Filament\Notifications\Notification;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 
-// IMPORT YANG BENAR UNTUK FILAMENT V5:
-use Filament\Schemas\Schema;                 // Wadah Utama Form
-use Filament\Schemas\Components\Section;     // Layout (Grid/Section) ada di Schemas
-use Filament\Forms\Components\FileUpload;    // Input (Text/File) tetap di Forms
+// IMPORT SESUAI VERSI KAMU:
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Forms\Components\FileUpload;
 
 class ManageWebsite extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    // --- BAGIAN 1: HAPUS PROPERTI STATIC NAVIGASI ---
-    // Jangan ada deklarasi public/protected static $navigation... di sini.
-    // Kita ganti dengan function di bawah agar tidak error Type Mismatch.
-
     protected string $view = 'filament.pages.manage-website';
-
-    // --- BAGIAN 2: GUNAKAN METHOD (Solusi Error Fatal) ---
-
     public static function getNavigationIcon(): ?string
     {
-        return 'heroicon-o-photo';
+        return 'heroicon-o-computer-desktop';
     }
 
     public static function getNavigationLabel(): string
@@ -42,16 +36,16 @@ class ManageWebsite extends Page implements HasForms
 
     public function getTitle(): string
     {
-        return 'Pengaturan Hero Section';
+        return 'Pengaturan Tampilan';
     }
 
-    // -----------------------------------------------------
 
     public ?array $data = [];
 
     public function mount(): void
     {
         $settings = SiteSetting::first();
+        // Mengisi form dengan data yang ada
         $this->form->fill($settings ? $settings->toArray() : []);
     }
 
@@ -59,21 +53,50 @@ class ManageWebsite extends Page implements HasForms
     {
         return $schema
             ->components([
-                // Section diambil dari namespace Filament\Schemas\Components
-                Section::make('Banner Utama')
-                    ->description('Gambar ini akan muncul sebagai latar belakang di halaman depan.')
+
+                // --- SECTION 1: HERO (BERANDA) ---
+                Section::make('Hero Section (Beranda)')
+                    ->description('Pengaturan tampilan banner besar di halaman utama.')
+                    ->collapsible() // Bisa dilipat biar rapi
                     ->schema([
-                        // FileUpload diambil dari namespace Filament\Forms\Components
                         FileUpload::make('hero_background')
-                            ->label('Upload Banner')
+                            ->label('Banner Utama')
                             ->disk('public')
                             ->image()
                             ->directory('hero-banners')
                             ->visibility('public')
                             ->imageEditor()
-                            ->maxSize(5120)
+                            ->maxSize(5120) // 5MB
                             ->columnSpanFull(),
                     ]),
+
+                // --- SECTION 2: STRUKTUR ORGANISASI ---
+                Section::make('Halaman Struktur Organisasi')
+                    ->description('Banner yang muncul khusus di halaman Struktur / InfoSphere.')
+                    ->collapsible()
+                    ->schema([
+                        // Kita pakai Grid agar Light & Dark mode bersebelahan
+                        Grid::make(2)->schema([
+                            FileUpload::make('structure_banner_light')
+                                ->label('Banner Mode Terang (Light)')
+                                ->helperText('Muncul saat user menggunakan Light Mode.')
+                                ->disk('public')
+                                ->image()
+                                ->directory('banners')
+                                ->visibility('public')
+                                ->maxSize(5120),
+
+                            FileUpload::make('structure_banner_dark')
+                                ->label('Banner Mode Gelap (Dark)')
+                                ->helperText('Muncul saat user menggunakan Dark Mode.')
+                                ->disk('public')
+                                ->image()
+                                ->directory('banners')
+                                ->visibility('public')
+                                ->maxSize(5120),
+                        ]),
+                    ]),
+
             ])
             ->statePath('data');
     }
@@ -83,11 +106,16 @@ class ManageWebsite extends Page implements HasForms
         $state = $this->form->getState();
 
         $settings = SiteSetting::firstOrNew();
-        $settings->hero_background = $state['hero_background'];
+
+        // Simpan data
+        $settings->hero_background = $state['hero_background'] ?? null;
+        $settings->structure_banner_light = $state['structure_banner_light'] ?? null;
+        $settings->structure_banner_dark = $state['structure_banner_dark'] ?? null;
+
         $settings->save();
 
         Notification::make()
-            ->title('Berhasil disimpan')
+            ->title('Tampilan berhasil diperbarui')
             ->success()
             ->send();
     }

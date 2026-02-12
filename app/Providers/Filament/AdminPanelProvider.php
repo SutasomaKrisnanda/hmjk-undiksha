@@ -34,6 +34,20 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('favicon.ico'))
             ->colors([
                 'primary' => Color::Amber,
+                'gray' => Color::Zinc,     // Digunakan untuk Bidang Inti (Hitam/Abu gelap)
+                'danger' => Color::Red,    // Bisa untuk PSDM
+                'warning' => Color::Amber, // Bisa untuk Inteks (Coklat/Amber)
+                'success' => Color::Green, // Bisa untuk Prodanus
+                'info' => Color::Blue,     // Bisa untuk Pendpro
+
+                'blue' => Color::Blue,      // Pendpro (Biru Tua)
+                'red' => Color::Red,        // PSDM (Merah)
+                'yellow' => Color::Yellow,  // Kesma (Kuning)
+                'orange' => Color::Orange,  // Pengmas (Oranye)
+                'sky' => Color::Sky,        // Komnasinfo (Biru Muda)
+                'amber' => Color::Amber,    // Inteks (Coklat/Amber)
+                'green' => Color::Green,    // Prodanus (Hijau)
+                'indigo' => Color::Indigo,  // Opsi lain untuk Biru Tua
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
