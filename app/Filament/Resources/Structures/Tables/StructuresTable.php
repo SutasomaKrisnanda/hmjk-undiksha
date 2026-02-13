@@ -51,7 +51,7 @@ class StructuresTable
                         'Bidang Komnasinfo' => 'sky',
                         'Bidang Inteks' => 'amber',
                         'Bidang Prodanus' => 'green',
-                        'Dekanat' => 'gray',
+                        'Dekanat' => 'indigo',
                         default => 'gray',
                     }),
 

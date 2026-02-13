@@ -9,8 +9,6 @@ class StructureSeeder extends Seeder
 {
     public function run(): void
     {
-        // Kosongkan tabel dulu agar bersih
-        Structure::truncate();
 
         $data = [
             // DEKANAT (Tetap Level 1)

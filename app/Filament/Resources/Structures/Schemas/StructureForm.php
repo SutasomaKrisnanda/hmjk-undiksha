@@ -61,6 +61,7 @@ class StructureForm
                         FileUpload::make('photo')
                             ->label('Foto Resmi')
                             ->image()
+                            ->disk('public')
                             ->directory('structures') // Folder penyimpanan
                             ->visibility('public')
                             ->imageEditor()
