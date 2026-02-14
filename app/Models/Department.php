@@ -11,6 +11,7 @@ class Department extends Model
         'slug',
         'color_theme',
         'logo',
+        'banner',
         'description',
         'order_level',
     ];

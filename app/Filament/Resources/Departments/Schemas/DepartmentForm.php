@@ -36,6 +36,15 @@ class DepartmentForm
                     ->imageEditor()
                     ->columnSpanFull(),
 
+                FileUpload::make('banner')
+                    ->label('Banner Header')
+                    ->image()
+                    ->disk('public')
+                    ->directory('departments/banners')
+                    ->imageEditor()
+                    ->columnSpan(1)
+                    ->helperText('Disarankan resolusi 1920x400px atau wide.'),
+
                 Textarea::make('description')->columnSpanFull(),
 
                 TextInput::make('order_level')

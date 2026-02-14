@@ -1,86 +1,172 @@
 <?php
 
 use Livewire\Volt\Component;
+use App\Models\Department;
 use App\Models\Structure;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 
-new
-#[Layout('components.layouts.web')]
-class extends Component {
-    public $code;
+new #[Layout('components.layouts.web')] class extends Component {
+    public Department $department;
 
     public function mount($code)
     {
-        $this->code = $code;
+        $this->department = Department::where('slug', $code)->firstOrFail();
     }
 
     public function with()
     {
-        $members = Structure::where('division_code', $this->code)->get();
-        $deptInfo = $members->first(); // Ambil info umum dari data pertama
+        $query = Structure::where('division_code', $this->department->slug);
 
         return [
-            'deptName' => $deptInfo->division ?? 'Bidang Tidak Ditemukan',
-            'color' => $deptInfo->color_theme ?? 'gray',
-            'kabid' => $members->where('position', 'Kepala Bidang')->first(),
-            'sekbid' => $members->where('position', 'Sekretaris Bidang')->first(),
-            'staff' => $members->where('position', 'Anggota')
+            'kabid' => (clone $query)->where(fn($q) =>
+                $q->where('position', 'LIKE', '%Kepala%')->orWhere('position', 'LIKE', '%Ketua%')
+            )->first(),
+
+            'sekbid' => (clone $query)->where('position', 'LIKE', '%Sekretaris%')->first(),
+
+            'benbid' => (clone $query)->where('position', 'LIKE', '%Bendahara%')->first(),
+
+            'staffs' => (clone $query)
+                ->where('position', 'NOT LIKE', '%Kepala%')
+                ->where('position', 'NOT LIKE', '%Ketua%')
+                ->where('position', 'NOT LIKE', '%Sekretaris%')
+                ->where('position', 'NOT LIKE', '%Bendahara%')
+                ->orderBy('name')
+                ->get(),
         ];
+    }
+
+    public function getPhoto($person)
+    {
+        return ($person && $person->photo)
+            ? Storage::url($person->photo)
+            : 'https://placehold.co/300x400/e2e8f0/64748b?text=FOTO';
     }
 };
 ?>
 
-<div class="min-h-screen bg-white dark:bg-black font-sans">
+<div class="min-h-screen bg-gray-50 dark:bg-black font-sans">
 
-    <section class="pt-32 pb-16 bg-{{ $color }}-600 text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/10"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
-            <a href="{{ route('structure.index') }}" wire:navigate class="inline-block mb-6 text-white/70 hover:text-white text-sm uppercase tracking-wider font-bold">
-                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Struktur
-            </a>
-            <h1 class="text-4xl md:text-6xl font-bold font-serif mb-2">{{ $deptName }}</h1>
-            <p class="text-white/80 uppercase tracking-[0.2em] text-sm">Kabinet Swarnadipa Ardhana</p>
+    <section class="relative pt-32 pb-16 overflow-hidden bg-cover bg-center transition-all"
+             style="{{ $department->banner ? 'background-image: url(' . Storage::url($department->banner) . ');' : 'background-color: ' . $department->color_theme . ';' }}">
+
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-gray-50 dark:to-black"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center text-white">
+            <div class="mb-6">
+                <a href="{{ route('structure.index') }}" wire:navigate
+                   class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/80 hover:text-white transition">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Struktur
+                </a>
+            </div>
+
+            <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 rounded-full bg-white p-1 shadow-2xl relative">
+                @if($department->logo)
+                    <img src="{{ Storage::url($department->logo) }}" class="w-full h-full object-cover rounded-full">
+                @else
+                    <div class="w-full h-full rounded-full flex items-center justify-center text-3xl"
+                         style="color: {{ $department->color_theme }}">
+                        <i class="fas fa-users"></i>
+                    </div>
+                @endif
+            </div>
+
+            <h1 class="text-3xl md:text-5xl font-bold font-serif mb-2 drop-shadow-md tracking-wide">
+                {{ $department->name }}
+            </h1>
+            <p class="text-white/80 uppercase tracking-[0.2em] text-xs md:text-sm">Kabinet Swarnadipa Ardhana</p>
         </div>
     </section>
 
-    <section class="py-16 max-w-5xl mx-auto px-4">
+    <section class="py-16 relative">
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]"></div>
 
-        <div class="grid md:grid-cols-2 gap-8 mb-16">
-            @if($kabid)
-            <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl flex items-center gap-6 border-l-4 border-{{ $color }}-500">
-                <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden shrink-0">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode($kabid->name) }}" class="w-full h-full object-cover">
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+
+                @if($kabid)
+                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4"
+                           style="border-left-color: {{ $department->color_theme }};">
+
+                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                        <img src="{{ $this->getPhoto($kabid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
+                    </div>
+
+                    <div class="flex flex-col justify-center">
+                        <flux:heading size="lg" class="leading-tight mb-1 font-bold">{{ $kabid->name }}</flux:heading>
+                        <span class="text-sm font-bold uppercase tracking-wider"
+                              style="color: {{ $department->color_theme }};">
+                            {{ $kabid->position }}
+                        </span>
+                    </div>
+                </flux:card>
+                @endif
+
+                @if($sekbid)
+                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4"
+                           style="border-left-color: {{ $department->color_theme }};">
+                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                        <img src="{{ $this->getPhoto($sekbid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <flux:heading size="lg" class="leading-tight mb-1 font-bold">{{ $sekbid->name }}</flux:heading>
+                        <span class="text-sm font-bold uppercase tracking-wider"
+                              style="color: {{ $department->color_theme }};">
+                            {{ $sekbid->position }}
+                        </span>
+                    </div>
+                </flux:card>
+                @endif
+
+                @if($benbid)
+                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4 md:col-span-2 md:w-1/2 md:mx-auto"
+                           style="border-left-color: {{ $department->color_theme }};">
+                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                        <img src="{{ $this->getPhoto($benbid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <flux:heading size="lg" class="leading-tight mb-1 font-bold">{{ $benbid->name }}</flux:heading>
+                        <span class="text-sm font-bold uppercase tracking-wider"
+                              style="color: {{ $department->color_theme }};">
+                            {{ $benbid->position }}
+                        </span>
+                    </div>
+                </flux:card>
+                @endif
+
+            </div>
+
+            @if($staffs->count() > 0)
+            <div class="pt-10 border-t border-dashed border-gray-200 dark:border-white/10">
+                <div class="text-center mb-10">
+                    <span class="inline-block px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-gray-500 bg-gray-100 dark:bg-zinc-800">
+                        Staff & Anggota
+                    </span>
                 </div>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900 dark:text-white">{{ $kabid->name }}</h3>
-                    <p class="text-{{ $color }}-600 font-bold text-sm uppercase">Kepala Bidang</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-center">
+                    @foreach($staffs as $staff)
+                    <div class="group h-full">
+                        <flux:card class="flex flex-col items-center text-center !p-3 hover:-translate-y-1 transition duration-300 h-full border-t-2 shadow-sm hover:shadow-md"
+                                   style="border-top-color: {{ $department->color_theme }}80">
+
+                            <div class="w-full aspect-[3/4] mb-2 overflow-hidden rounded-md bg-gray-100 dark:bg-zinc-800">
+                                <img src="{{ $this->getPhoto($staff) }}"
+                                     class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
+                            </div>
+
+                            <h4 class="text-xs md:text-sm font-bold leading-tight mb-1 text-gray-800 dark:text-gray-200">
+                                {{ $staff->name }}
+                            </h4>
+                        </flux:card>
+                    </div>
+                    @endforeach
                 </div>
             </div>
             @endif
 
-            @if($sekbid)
-            <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl flex items-center gap-6 border-l-4 border-{{ $color }}-500">
-                <div class="w-20 h-20 rounded-full bg-gray-200 overflow-hidden shrink-0">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode($sekbid->name) }}" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900 dark:text-white">{{ $sekbid->name }}</h3>
-                    <p class="text-{{ $color }}-600 font-bold text-sm uppercase">Sekretaris Bidang</p>
-                </div>
-            </div>
-            @endif
         </div>
-
-        <h3 class="text-center font-bold text-gray-400 uppercase tracking-widest mb-8 text-sm">Staff & Anggota</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            @foreach($staff as $s)
-            <div class="p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-{{ $color }}-500 transition flex items-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-{{ $color }}-500"></div>
-                <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">{{ $s->name }}</span>
-            </div>
-            @endforeach
-        </div>
-
     </section>
-
 </div>

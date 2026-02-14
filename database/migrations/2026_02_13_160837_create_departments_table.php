@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Contoh: Bidang Pendidikan dan Profesi
-            $table->string('slug')->unique(); // Contoh: pendpro
-            $table->string('color_theme')->default('gray'); // Contoh: blue
-            $table->string('logo')->nullable(); // Path logo
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('color_theme')->default('gray');
+            $table->string('logo')->nullable();
+            $table->string('banner')->nullable();
             $table->text('description')->nullable();
             $table->integer('order_level')->default(0);
             $table->timestamps();
