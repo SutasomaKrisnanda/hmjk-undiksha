@@ -36,7 +36,7 @@ mount(function () {
         <div class="w-full h-[120vh] z-0 transition-none"
              :class="finished ? 'fixed top-0 left-0' : 'absolute inset-0'">
 
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
                  style="background-image: url('{{ $heroImage }}');">
             </div>
 
