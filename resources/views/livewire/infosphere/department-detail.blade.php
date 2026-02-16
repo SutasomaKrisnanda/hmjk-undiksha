@@ -51,7 +51,7 @@ new #[Layout('components.layouts.web')] class extends Component {
     <section class="relative pt-32 pb-16 overflow-hidden bg-cover bg-center transition-all"
              style="{{ $department->banner ? 'background-image: url(' . Storage::url($department->banner) . ');' : 'background-color: ' . $department->color_theme . ';' }}">
 
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-gray-50 dark:to-black"></div>
+        <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/40 to-gray-50 dark:to-black"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 text-center text-white">
             <div class="mb-6">
@@ -87,10 +87,10 @@ new #[Layout('components.layouts.web')] class extends Component {
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
 
                 @if($kabid)
-                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4"
+                <flux:card class="flex flex-row items-center gap-5 p-4! hover:-translate-y-1 transition duration-300 border-l-4"
                            style="border-left-color: {{ $department->color_theme }};">
 
-                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                    <div class="w-24 shrink-0 aspect-3/4 overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
                         <img src="{{ $this->getPhoto($kabid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
                     </div>
 
@@ -105,9 +105,9 @@ new #[Layout('components.layouts.web')] class extends Component {
                 @endif
 
                 @if($sekbid)
-                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4"
+                <flux:card class="flex flex-row items-center gap-5 p-4! hover:-translate-y-1 transition duration-300 border-l-4"
                            style="border-left-color: {{ $department->color_theme }};">
-                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                    <div class="w-24 shrink-0 aspect-3/4 overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
                         <img src="{{ $this->getPhoto($sekbid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
                     </div>
                     <div class="flex flex-col justify-center">
@@ -121,9 +121,9 @@ new #[Layout('components.layouts.web')] class extends Component {
                 @endif
 
                 @if($benbid)
-                <flux:card class="flex flex-row items-center gap-5 !p-4 hover:-translate-y-1 transition duration-300 border-l-4 md:col-span-2 md:w-1/2 md:mx-auto"
+                <flux:card class="flex flex-row items-center gap-5 p-4! hover:-translate-y-1 transition duration-300 border-l-4 md:col-span-2 md:w-1/2 md:mx-auto"
                            style="border-left-color: {{ $department->color_theme }};">
-                    <div class="w-24 shrink-0 aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
+                    <div class="w-24 shrink-0 aspect-3/4 overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800">
                         <img src="{{ $this->getPhoto($benbid) }}" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
                     </div>
                     <div class="flex flex-col justify-center">
@@ -149,10 +149,10 @@ new #[Layout('components.layouts.web')] class extends Component {
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 justify-center">
                     @foreach($staffs as $staff)
                     <div class="group h-full">
-                        <flux:card class="flex flex-col items-center text-center !p-3 hover:-translate-y-1 transition duration-300 h-full border-t-2 shadow-sm hover:shadow-md"
+                        <flux:card class="flex flex-col items-center text-center p-3! hover:-translate-y-1 transition duration-300 h-full border-t-2 shadow-sm hover:shadow-md"
                                    style="border-top-color: {{ $department->color_theme }}80">
 
-                            <div class="w-full aspect-[3/4] mb-2 overflow-hidden rounded-md bg-gray-100 dark:bg-zinc-800">
+                            <div class="w-full aspect-3/4 mb-2 overflow-hidden rounded-md bg-gray-100 dark:bg-zinc-800">
                                 <img src="{{ $this->getPhoto($staff) }}"
                                      class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition duration-500">
                             </div>
