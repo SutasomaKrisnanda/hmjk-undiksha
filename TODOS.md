@@ -24,7 +24,7 @@ Bagian ini adalah kerangka dasar aplikasi.
 - [x] **Setup Filament Admin Panel**
 - [x] **Global Footer** (Responsif & Data Statis)
 - [x] **Global Navbar** (Sticky, Mobile Menu, Dark Mode, Logic Active State)
-- [ ] *Livewire smooth navigating system
+- [1/2] *Livewire smooth navigating system
 
 ---
 
@@ -32,11 +32,11 @@ Bagian ini adalah kerangka dasar aplikasi.
 Sebelum mengerjakan Frontend dinamis, kita perlu menyiapkan "wadah" datanya terlebih dahulu di Database dan Filament Resource agar Admin bisa menginput data.
 
 ** Infosphere Data **
-- [ ] ** Migrasi & Model: `Department` (Bidang)
+- [x] ** Migrasi & Model: `Department` (Bidang)
     - *Fields: name, description, icon, color, vision/mission.*
-- [ ] ** Migrasi & Model: `Member` (Anggota)
+- [1/2] ** Migrasi & Model: `Member` (Anggota)
     - *Fields: name, nim, position (Ketua/Sekretaris/Anggota), photo, instagram_link, linkedin_link, bio.*
-- [ ] ** Filament Resource: CRUD untuk Bidang & Anggota.
+- [x] ** Filament Resource: CRUD untuk Bidang & Anggota.
 
 ** Event & Program Data **
 - [ ] ** Migrasi & Model: `Event` (Agenda)
@@ -64,11 +64,11 @@ Fokus: *First Impression* pengunjung.
 Fokus: Visualisasi data organisasi yang informatif.
 *File: `resources/views/infosphere.blade.php` (Prototype sudah ada)*
 
-- [ ] ** **Integrasi Database ke View**
+- [x] ** **Integrasi Database ke View**
     - *Task:* Mengganti Array PHP statis di `infosphere.blade.php` dengan query Eloquent dari Model `Department` dan `Member`.
 - [ ] ** **Struktur Hirarki (Tree Visual)**
-    - *Task:* Pastikan visualisasi pohon jabatan (BPH Inti) ter-render rapi dari data database.
-- [ ] ** **Halaman Detail Bidang**
+    - *Task:* Pastikan visualisasi pohon jabatan (Bidang Inti) ter-render rapi dari data database.
+- [x] ** **Halaman Detail Bidang**
     - *Task:* Saat user klik ikon bidang, tampilkan modal atau halaman detail berisi Visi, Misi, dan Proker bidang tersebut.
 - [ ] ** **Halaman Profil Anggota**
     - *Task:* Halaman/Modal detail untuk setiap anggota (Foto Besar, Bio Singkat, Tautan Sosmed).
