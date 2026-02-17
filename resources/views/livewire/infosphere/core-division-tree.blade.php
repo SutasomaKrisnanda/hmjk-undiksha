@@ -68,7 +68,6 @@ new class extends Component {
 
         <div class="relative z-10 w-full">
             <div class="hidden md:block absolute top-0 left-[25%] right-[25%] h-6 border-t border-l border-r border-gray-400 dark:border-zinc-600 rounded-t-lg pointer-events-none"></div>
-            <div class="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 h-6 w-px bg-gray-400 dark:bg-zinc-600"></div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 relative mt-0 md:mt-3 justify-items-center">
 
