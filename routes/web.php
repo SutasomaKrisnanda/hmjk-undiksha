@@ -20,7 +20,10 @@ Volt::route('/struktur', 'infosphere.structure')
 // Lokasi file: resources/views/livewire/infosphere/department-detail.blade.php
 Volt::route('/bidang/{code}', 'infosphere.department-detail')
     ->name('department.show');
-
+    
+// D. Hubungi Kami
+// Lokasi file: resources/views/livewire/contact-us.blade.php
+Volt::route('/hubungi-kami', 'contact-us')->name('contact');
 
 // ----------------------------------------------------------------------
 // PROTECTED ROUTES (Backend/Dashboard)
